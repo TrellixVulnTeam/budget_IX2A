@@ -1,0 +1,39 @@
+{
+  "build": "py38h6163131_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "blas * openblas",
+    "libgcc-ng >=7.3.0",
+    "libopenblas >=0.3.3,<1.0a0",
+    "numpy-base 1.19.2 py38h75fe3a5_0",
+    "python >=3.8,<3.9.0a0"
+  ],
+  "extracted_package_dir": "/home/beekayokay/miniconda3/pkgs/numpy-1.19.2-py38h6163131_0",
+  "features": "",
+  "files": [],
+  "fn": "numpy-1.19.2-py38h6163131_0.conda",
+  "legacy_bz2_md5": "d6514a8cc07b4523349feee8fc6f3363",
+  "legacy_bz2_size": 21092,
+  "license": "BSD 3-Clause",
+  "link": {
+    "source": "/home/beekayokay/miniconda3/pkgs/numpy-1.19.2-py38h6163131_0",
+    "type": 1
+  },
+  "md5": "5b40fa6d854c008565364bf9c52b4e95",
+  "name": "numpy",
+  "package_tarball_full_path": "/home/beekayokay/miniconda3/pkgs/numpy-1.19.2-py38h6163131_0.conda",
+  "paths_data": {
+    "paths": [],
+    "paths_version": 1
+  },
+  "requested_spec": "numpy==1.19.2=py38h6163131_0",
+  "sha256": "a8f7d303198e5db994775235817d35dc954b1ff8ff362d88d55edbafbf76175f",
+  "size": 22147,
+  "subdir": "linux-64",
+  "timestamp": 1603479836038,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/numpy-1.19.2-py38h6163131_0.conda",
+  "version": "1.19.2"
+}

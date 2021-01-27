@@ -1,0 +1,42 @@
+{
+  "build": "hb0f4dca_0",
+  "build_number": 0,
+  "channel": "https://conda.anaconda.org/anaconda/linux-64",
+  "constrains": [],
+  "depends": [],
+  "extracted_package_dir": "/home/beekayokay/miniconda3/pkgs/pandoc-2.11-hb0f4dca_0",
+  "features": "",
+  "files": [
+    "bin/pandoc"
+  ],
+  "fn": "pandoc-2.11-hb0f4dca_0.tar.bz2",
+  "license": "GPL-2.0",
+  "license_family": "GPL",
+  "link": {
+    "source": "/home/beekayokay/miniconda3/pkgs/pandoc-2.11-hb0f4dca_0",
+    "type": 1
+  },
+  "md5": "2b9c70dc32117b72325c063a937542a8",
+  "name": "pandoc",
+  "package_tarball_full_path": "/home/beekayokay/miniconda3/pkgs/pandoc-2.11-hb0f4dca_0.tar.bz2",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "bin/pandoc",
+        "path_type": "hardlink",
+        "sha256": "5af9b56f42944a0551b4d1196b59eed83ac768409ac830eb0289236d6f1a3cf3",
+        "sha256_in_prefix": "5af9b56f42944a0551b4d1196b59eed83ac768409ac830eb0289236d6f1a3cf3",
+        "size_in_bytes": 81554464
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "pandoc==2.11=hb0f4dca_0",
+  "sha256": "ce82f3df39f8998899000f3c0923ec5df2cd3e0745c86cf3b620da316b19faaf",
+  "size": 13094235,
+  "subdir": "linux-64",
+  "timestamp": 1602698657595,
+  "track_features": "",
+  "url": "https://conda.anaconda.org/anaconda/linux-64/pandoc-2.11-hb0f4dca_0.tar.bz2",
+  "version": "2.11"
+}
