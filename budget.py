@@ -4,7 +4,10 @@ from dateutil.rrule import rrule, DAILY, WEEKLY, MONTHLY
 from fractions import Fraction
 import sys
 
+import numpy as np
 import pandas as pd
+
+import PyQt5.QtCore as qtc
 
 
 class Budget:
@@ -126,6 +129,8 @@ class Budget:
                 temp_schedule = rrule(WEEKLY, dtstart=recur_date, count=52, interval=2)
             elif recur == 'monthly':
                 temp_schedule = rrule(MONTHLY, dtstart=recur_date, count=24, interval=1)
+            elif recur == 'semi-yearly':
+                temp_schedule = rrule(MONTHLY, dtstart=recur_date, count=8, interval=6)
             elif recur == 'yearly':
                 temp_schedule = rrule(MONTHLY, dtstart=recur_date, count=4, interval=12)
             else:
@@ -136,8 +141,7 @@ class Budget:
                     break
                 else:
                     pass
-
-        # UDPATE FILE
+        bills['recur_date'] = pd.to_datetime(bills['recur_date'])
         bills.to_csv('bills.csv', index=False)
 
         # GENERATE EMPTY BILL SCHEDULE
@@ -146,12 +150,52 @@ class Budget:
         )
         last_7_df = pd.DataFrame(columns=['date', 'charges', 'amt'])
         next_21_df = pd.DataFrame(columns=['date', 'charges', 'amt'])
+        next_21_df.index = np.arange(7, len(next_21_df) + 7)
         for index, each in enumerate(last_next_28):
             if index <= 6:
                 last_7_df.loc[index, 'date'] = each
                 last_7_df.loc[index, 'charges'] = '|'
                 last_7_df.loc[index, 'amt'] = 0
             else:
-                next_21_df.loc[index - 7, 'date'] = each
-                next_21_df.loc[index - 7, 'charges'] = '|'
-                next_21_df.loc[index - 7, 'amt'] = 0
+                next_21_df.loc[index, 'date'] = each
+                next_21_df.loc[index, 'charges'] = '|'
+                next_21_df.loc[index, 'amt'] = 0
+
+        # FILL IN LAST/NEXT DF'S
+        for index, row in bills.iterrows():
+            temp_7 = last_7_df.loc[last_7_df['date'] == bills.loc[index, 'recur_date']]
+            temp_7['charges'] = temp_7['charges'] + ' ' + bills.loc[index, 'Title'] + ' | '
+            temp_7['amt'] = temp_7['amt'] + bills.loc[index, 'amt']
+            temp_21 = next_21_df.loc[next_21_df['date'] == bills.loc[index, 'recur_date']]
+            temp_21['charges'] = temp_21['charges'] + ' ' + bills.loc[index, 'Title'] + ' | '
+            temp_21['amt'] = temp_21['amt'] + bills.loc[index, 'amt']
+            last_7_df.update(temp_7)
+            next_21_df.update(temp_21)
+
+        # TESTING FOR PRINT
+        self.bills = bills
+        self.last_7_df = last_7_df
+        self.next_21_df = next_21_df
+
+
+class pandasModel(qtc.QAbstractTableModel):
+    def __init__(self, data):
+        qtc.QAbstractTableModel.__init__(self)
+        self._data = data
+
+    def rowCount(self, parent=None):
+        return self._data.shape[0]
+
+    def columnCount(self, parent=None):
+        return self._data.shape[1]
+
+    def data(self, index, role=qtc.Qt.DisplayRole):
+        if index.isValid():
+            if role == qtc.Qt.DisplayRole:
+                return str(self._data.iloc[index.row(), index.column()])
+        return None
+
+    def headerData(self, col, orientation, role):
+        if orientation == qtc.Qt.Horizontal and role == qtc.Qt.DisplayRole:
+            return self._data.columns[col]
+        return None
